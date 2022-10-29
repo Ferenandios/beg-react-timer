@@ -26,23 +26,21 @@ const App = () => {
         >{timerIsOn ? 'Выключить' : 'Включить'}</button>
       </div>
       <h3>Прошло: {time} {
-        (() => {
-          if (time === 1 || time.toString().slice(-2) !== '11' && time.toString().slice(-1) === '1') {
-            return 'секунда'
+        (number => {
+          let n = Math.abs(number);
+          n %= 100;
+          if (n >= 5 && n <= 20) {
+            return 'секунд';
           }
-          else if (time === 2 || time.toString().slice(-2) !== '12' && time.toString().slice(-1) === '2') {
-            return 'секунды'
+          n %= 10;
+          if (n === 1) {
+            return 'секунда';
           }
-          else if (time === 3 || time.toString().slice(-2) !== '13' && time.toString().slice(-1) === '3') {
-            return 'секунды'
+          if (n >= 2 && n <= 4) {
+            return 'секунды';
           }
-          else if (time === 4 || time.toString().slice(-2) !== '14' && time.toString().slice(-1) === '4') {
-            return 'секунды'
-          }
-          else {
-            return 'секунд'
-          }
-        })()
+          return 'секунд';
+        })(time)
       }</h3>
     </div>
   )
